@@ -6,7 +6,11 @@ import (
 )
 
 func main() {
-	doc := parser.GetDocumentFromUrl("https://www.10musume.com/moviepages/072019_01/index.html?pncid=1", "euc-jp")
-	actor := doc.Find("#detail > div.detail-info > div:nth-child(1) > div.detail-info__meta > dl > dd:nth-child(8) > a").Text()
-	fmt.Println(actor)
+	//path := "PRED-148"
+	//path := "071519_871-1pon-1080p"
+	//path := "072019_01-10mu-1080p"
+	//path := "062819-950-carib-1080p"
+	path := "heyzo_hd_2040_full"
+
+	fmt.Println(parser.New(path))
 }
