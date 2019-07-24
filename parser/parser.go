@@ -19,8 +19,8 @@ func New(path string) (parser Parser) {
 	switch {
 	//case onepondo.MatchString(path):
 	//	return "1pon"
-	//case musume.MatchString(path):
-	//	parser = "10musume"
+	case musume.MatchString(file.Name):
+		parser = &Musume{file: file}
 	//case carib.MatchString(path):
 	//	return "carib"
 	case heyzo.MatchString(file.Name):
