@@ -21,8 +21,8 @@ func New(path string) (parser Parser) {
 	//	return "1pon"
 	case musume.MatchString(file.Name):
 		parser = &Musume{file: file}
-	//case carib.MatchString(path):
-	//	return "carib"
+	case carib.MatchString(path):
+		parser = &Carib{file: file}
 	case heyzo.MatchString(file.Name):
 		parser = &Heyzo{file: file}
 	//case jav.MatchString(path):
