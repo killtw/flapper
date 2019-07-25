@@ -3,6 +3,7 @@ package parser
 import (
 	"log"
 	"regexp"
+	"strings"
 )
 
 var (
@@ -25,8 +26,8 @@ func New(path string) (parser Parser) {
 		parser = &Carib{file: file}
 	case heyzo.MatchString(file.Name):
 		parser = &Heyzo{file: file}
-	//case jav.MatchString(path):
-	//	return "jav"
+	case jav.MatchString(strings.ReplaceAll(file.Name, "hjd2048.com", "")):
+		parser = &Jav{file: file}
 	default:
 		log.Fatal("Nothing matched")
 	}
