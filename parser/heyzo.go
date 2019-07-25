@@ -21,7 +21,7 @@ func (parser *Heyzo) parse() Parser {
 func (parser *Heyzo) Go() error {
 	parser.parse()
 
-	if err := parser.file.Move(parser.actor, ""); err != nil {
+	if _, err := parser.file.Move(parser.actor, ""); err != nil {
 		return err
 	}
 

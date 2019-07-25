@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 type File struct {
@@ -26,23 +27,25 @@ func NewFile(path string) File {
 }
 
 func (f *File) mkDir(name string) *File {
-	f.Dir = fmt.Sprintf("%s/%s", "/Users/killtw/Downloads", name)
+	f.Dir = filepath.Join("/Users/killtw/Downloads", name)
 
 	_ = os.MkdirAll(f.Dir, 0755)
 
 	return f
 }
 
-func (f *File) Move(dir string, name string) error {
+func (f *File) Move(dir string, name string) (*File, error) {
 	f.mkDir(dir)
 
 	if name == "" {
 		name = f.Name
+	} else {
+		name = name + filepath.Ext(f.Name)
 	}
 
 	if err := os.Rename(f.Path, fmt.Sprintf("%s/%s", f.Dir, name)); err != nil {
-		return fmt.Errorf("move failed: %s", err)
+		return nil, fmt.Errorf("move failed: %s", err)
 	}
 
-	return nil
+	return f, nil
 }

@@ -22,7 +22,7 @@ func (parser *Musume) parse() Parser {
 func (parser *Musume) Go() error {
 	parser.parse()
 
-	if err := parser.file.Move(parser.actor, ""); err != nil {
+	if _, err := parser.file.Move(parser.actor, ""); err != nil {
 		return err
 	}
 

@@ -22,7 +22,7 @@ func (parser *Onepondo) parse() Parser {
 func (parser *Onepondo) Go() error {
 	parser.parse()
 
-	if err := parser.file.Move(parser.actor, ""); err != nil {
+	if _, err := parser.file.Move(parser.actor, ""); err != nil {
 		return err
 	}
 
