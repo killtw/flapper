@@ -32,15 +32,22 @@ func GetJsonFromUrl(url string) map[string]interface{} {
 }
 
 func getResponseFromUrl(url string) *http.Response {
-	res, err := http.Get(url)
+	request, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.StatusCode != http.StatusOK {
-		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
+	request.AddCookie(&http.Cookie{Name: "over18", Value: "18"})
+
+	var client = &http.Client{}
+	response, err := client.Do(request)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if response.StatusCode != http.StatusOK {
+		log.Fatalf("status code error: %d %s", response.StatusCode, response.Status)
 	}
 
-	return res
+	return response
 }
 
 func decodeHTMLBody(body io.Reader, charset string) io.Reader {
