@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type File struct {
@@ -30,7 +31,12 @@ func NewFile(path string, conf config.Configure) File {
 }
 
 func (f *File) mkDir(name string) *File {
-	f.Dir = filepath.Join("/Users/killtw/Downloads", name)
+	if strings.HasPrefix(f.home, "~/") {
+		usr, _ := os.UserHomeDir()
+		f.home = strings.ReplaceAll(f.home, "~/", usr + "/")
+	}
+
+	f.Dir = filepath.Join(f.home, name)
 
 	_ = os.MkdirAll(f.Dir, 0755)
 
