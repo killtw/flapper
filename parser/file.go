@@ -2,6 +2,7 @@ package parser
 
 import (
 	"fmt"
+	"github.com/killtw/flapper/config"
 	"log"
 	"os"
 	"path/filepath"
@@ -11,9 +12,10 @@ type File struct {
 	Path string
 	Name string
 	Dir string
+	home string
 }
 
-func NewFile(path string) File {
+func NewFile(path string, conf config.Configure) File {
 	info, err := os.Stat(path)
 
 	if err != nil {
@@ -23,6 +25,7 @@ func NewFile(path string) File {
 	return File{
 		Path: path,
 		Name: info.Name(),
+		home: conf.Home,
 	}
 }
 
