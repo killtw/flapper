@@ -14,15 +14,13 @@ var (
 	heyzo    = regexp.MustCompile(`heyzo([-_]hd)?[-_](\d{3,4})`)
 )
 
-func New(path string) (parser Parser) {
-	file := NewFile(path)
-
+func New(file File) (parser Parser) {
 	switch {
-	case onepondo.MatchString(path):
+	case onepondo.MatchString(file.Name):
 		parser = &Onepondo{file: file}
 	case musume.MatchString(file.Name):
 		parser = &Musume{file: file}
-	case carib.MatchString(path):
+	case carib.MatchString(file.Name):
 		parser = &Carib{file: file}
 	case heyzo.MatchString(file.Name):
 		parser = &Heyzo{file: file}
